@@ -73,7 +73,6 @@ for perm =1:num_permutations
               end
           end
       end
-
     end
     for time_point =1:DT % all time points are independent
             for condA=1:DC%M %loop through all conditions %% CONDITIONS
