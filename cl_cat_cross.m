@@ -22,6 +22,8 @@ for KK = 1:Numcats % 3 categories
     if subn<11 || subn>24
         subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d')], 'timelock_EM_excl.mat'));
     else
+        % for the subjects from 11 to 23 - the auditory and visual data are
+        % stored separately
         if isequal(triggertemp, 100)
             subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d') '_2'], 'timelock_EM_excl.mat'));
         else
