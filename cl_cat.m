@@ -27,6 +27,8 @@ for KK = 1:Numcats % 3 categories
 if subn<11 || subn>24
     subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d')], 'timelock_EM_excl.mat'));
 else
+    % for the subjects from 11 to 23 - the auditory and visual data are
+    % stored separately
     if isequal(modality, 'vis')
         subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d') '_2'], 'timelock_EM_excl.mat'));
     else
@@ -75,7 +77,7 @@ for perm =1:num_permutations
     end
     %% 6). Use multivariate noise normalization if set
     if use_mvnn
-        permutedC = MVNN(permutedC, K);
+        permutedC = MVNN(permutedC, DP);
     end
     %% 7). Sort trials into super-trials
     for co = 1:DC
