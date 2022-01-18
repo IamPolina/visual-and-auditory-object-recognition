@@ -1,4 +1,7 @@
 function plot_cat_cross_timeseries
+% the signed rank test as implemented in Pantazis et al., 2004 
+% "Statistical Surface-Based Morphometry Using a Non-Parametric Approach."
+% function for plotting boundedline: https://www.mathworks.com/matlabcentral/fileexchange/27485-boundedline-m
 % paths
 addpath('/home/iampolina/OR/WORKFLOW/ANALYSIS/rerun_2021/stats_pantazis')
 addpath(genpath('/home/iampolina/OR/WORKFLOW/ANALYSIS/rerun_2021/PLOT/plot_boundedline'))
@@ -26,7 +29,6 @@ figure(2)
 h1 = pcolor(squeeze(stdcurve))
 set(h1, 'EdgeColor', 'none'); colorbar
 print(fullfile(pwd, 'cat_dec'), '-dsvg')
-
 
 %1D plot
 % cross decoding at the diagonal
