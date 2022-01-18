@@ -27,7 +27,11 @@ for KK = 1:Numcats % 3 categories
 if subn<11 || subn>24
     subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d')], 'timelock_EM_excl.mat'));
 else
-    subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d') '_2'], 'timelock_EM_excl.mat'));
+    if isequal(modality, 'vis')
+        subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d') '_2'], 'timelock_EM_excl.mat'));
+    else
+        subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d')], 'timelock_EM_excl.mat'));
+    end
 end
     
 fileName = [subdireeg(1).folder, '/', subdireeg(1).name];
