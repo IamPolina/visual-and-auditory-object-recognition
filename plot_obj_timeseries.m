@@ -1,5 +1,9 @@
 function plot_obj_timeseries(modvar)
 % modvar is 1 for vis and 2 for aud
+% the signed rank test as implemented in Pantazis et al., 2004 
+% "Statistical Surface-Based Morphometry Using a Non-Parametric Approach."
+% function for plotting boundedline: https://www.mathworks.com/matlabcentral/fileexchange/27485-boundedline-m
+
 % paths
 addpath(genpath('/home/iampolina/OR/WORKFLOW/ANALYSIS/rerun_2021/PLOT/plot_boundedline'))
 addpath('/home/iampolina/OR/WORKFLOW/ANALYSIS/rerun_2021/stats_pantazis')
