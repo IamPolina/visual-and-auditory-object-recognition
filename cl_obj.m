@@ -73,7 +73,7 @@ for perm =1:num_permutations
                 pseudo_trialD(co,:,step,:)= squeeze(mean(permutedC(co,:,edges(step):edges(step)+H(step)-1,:),3)); %assign pseudo trial to pseudo_trial_D
         end
     end
-    %% 6). Use noise normalization if set
+    %% 7). Use noise normalization if set
     for time_point =1:DT % all time points are independent
             for condA=1:DC%M %loop through all conditions %% CONDITIONS
                 for condB = condA:DC%M  %loop through all conditions >condA+1 (to get all pair-wise combinations
