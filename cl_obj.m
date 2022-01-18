@@ -61,6 +61,11 @@ for perm =1:num_permutations
     for co = 1:DC
         permutedC(co, :, :, :) = squeeze(CondMatrix(co, :, randperm(DP),:)); %% CHANGE
     end
+    %% 6). Use multivariate noise normalization if set
+    if use_mvnn
+        permutedC = MVNN(permutedC, DP);
+    end
+    
     % shuffle #2
     pseudo_trialD=NaN(DC,DE,K,DT); %pre-allocate memory
     for co = 1:DC
@@ -69,21 +74,11 @@ for perm =1:num_permutations
         end
     end
     %% 6). Use noise normalization if set
-    if use_nn
-      for t = 1:DT
-          for c = 1:DC
-              for p = 1:K
-                pseudo_trialD(c,:,p,t) = zscore(pseudo_trialD(c,:,p,t), 1,2);
-              end
-          end
-      end
-    end
     for time_point =1:DT % all time points are independent
             for condA=1:DC%M %loop through all conditions %% CONDITIONS
                 for condB = condA:DC%M  %loop through all conditions >condA+1 (to get all pair-wise combinations
-            %['condA:' num2str(condA) ' ' 'condB: ' num2str(condB)]
-            
-
+                %['condA:' num2str(condA) ' ' 'condB: ' num2str(condB)]
+           
                     for testpt = 1:K
                         trainpt = setdiff(1:K, testpt);
                         training_data=[squeeze(pseudo_trialD(condA,:,trainpt, time_point))' ; squeeze(pseudo_trialD(condB,:,trainpt,time_point))'];
