@@ -49,9 +49,9 @@ for KK = 1:Numcats % 3 categories
     DT{mod} = size(CondMatrix{mod},4); % dimension time
     
     
-    %% 3). Create pseudotrials
+    %% 3). Parameters for supertrials
     ['create pseudotrials']
-    K=5;
+    K=3;
     L=floor(DP{mod}/K);
     [H{mod},edges{mod}] = histcounts([1:DP{mod}],K);
     edges{mod} = ceil(edges{mod});
@@ -78,11 +78,11 @@ for perm =1:num_permutations
         else
             Q = DT{1};
         end
-
+       %% 6). Use multivariate noise normalization if set
         if use_mvnn
-            permutedC{mod} = MVNN(permutedC{mod}, K);
+            permutedC{mod} = MVNN(permutedC{mod}, DP{mod});
         end
-        % make pseudotrials
+        % make supertrials
         for co = 1:DC{mod}
             for step= 1:K %average by steps
                     pseudo_trialD{mod}(co,step,:,:)= squeeze(mean(permutedC{mod}(co,edges{mod}(step):edges{mod}(step)+H{mod}(step)-1,:,:),2)); %assign pseudo trial to pseudo_trial_D
