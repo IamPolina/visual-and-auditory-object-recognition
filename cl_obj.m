@@ -13,10 +13,14 @@ direeg = '/scratch/iampolina/OR/DATA/EEG';
 %% 1). Load  data load conditions X ...
 %% X electodes X probe X time 
 Nobj = 48;
-if subn<11 || subn>24 
+if subn<11 || subn>24
     subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d')], 'timelock_EM_excl.mat'));
 else
-    subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d') '_2'], 'timelock_EM_excl.mat'));
+    if isequal(modality, 'vis')
+        subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d') '_2'], 'timelock_EM_excl.mat'));
+    else
+        subdireeg = dir(fullfile(direeg, ['sub' num2str(subn, '%02d')], 'timelock_EM_excl.mat'));
+    end
 end
 fileName = [subdireeg(1).folder, '/', subdireeg(1).name];
 load(fileName)
